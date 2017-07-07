@@ -12,14 +12,23 @@ public enum CategoriePizza {
 
 	public String libelle;
 
+	/**
+	 * @param libelle
+	 */
 	CategoriePizza(String libelle) {
 		this.setLibelle(libelle);
 	}
 
+	/**
+	 * @return
+	 */
 	public String getLibelle() {
 		return libelle;
 	}
 
+	/**
+	 * @param libelle
+	 */
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
