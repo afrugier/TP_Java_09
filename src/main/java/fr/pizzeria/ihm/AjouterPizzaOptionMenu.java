@@ -5,7 +5,9 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
+import org.apache.commons.text.similarity.LevenshteinDistance;
 
 public class AjouterPizzaOptionMenu extends OptionMenu {
 
@@ -50,7 +52,13 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 		System.out.println("Veuillez saisir le prix");
 		double prixPizza = questionAjout.nextDouble();
 
-		Pizza pizza = new Pizza(codePizza, nomPizza, prixPizza);
+		System.out.println("Veuillez saisir la catégorie de la pizza");
+		for (CategoriePizza categ : CategoriePizza.values()) {
+				System.out.println(categ.name());
+		}
+		String categ = questionAjout.next();
+
+		Pizza pizza = new Pizza(codePizza, nomPizza, prixPizza, CategoriePizza.valueOf(categ));
 
 		try {
 			dao.saveNewPizza(pizza);

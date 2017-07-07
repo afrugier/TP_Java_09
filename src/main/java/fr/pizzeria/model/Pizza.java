@@ -11,18 +11,13 @@ public class Pizza {
 	String nom;
 	double prix;
 	static int compteur = 0;
+	CategoriePizza categoriePizza;
 	
-	/**
-	 * @param id
-	 * @param code
-	 * @param nom
-	 * @param prix
-	 */
-	public Pizza(int id, String code, String nom, double prix) {
-		this.id = id;
-		this.nom = nom;
-		this.code = code;
-		this.prix = prix;
+	public CategoriePizza getCategoriePizza() {
+		return categoriePizza;
+	}
+	public void setCategoriePizza(CategoriePizza categoriePizza) {
+		this.categoriePizza = categoriePizza;
 	}
 	/**
 	 * @param id
@@ -30,11 +25,25 @@ public class Pizza {
 	 * @param nom
 	 * @param prix
 	 */
-	public Pizza(String code, String nom, double prix) {
+	public Pizza(int id, String code, String nom, double prix, CategoriePizza categoriePizza) {
+		this.id = id;
+		this.nom = nom;
+		this.code = code;
+		this.prix = prix;
+		this.categoriePizza = categoriePizza;
+	}
+	/**
+	 * @param id
+	 * @param code
+	 * @param nom
+	 * @param prix
+	 */
+	public Pizza(String code, String nom, double prix, CategoriePizza categoriePizza) {
 		this.id = compteur++;
 		this.nom = nom;
 		this.code = code;
 		this.prix = prix;
+		this.categoriePizza = categoriePizza;
 	}
 
 	/**
