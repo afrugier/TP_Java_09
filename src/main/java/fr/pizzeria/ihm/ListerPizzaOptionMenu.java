@@ -8,9 +8,7 @@ import fr.pizzeria.dao.IPizzaDao;
  */
 public class ListerPizzaOptionMenu extends OptionMenu {
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see fr.pizzeria.ihm.OptionMenu#getLibelle()
 	 */
 	@Override
@@ -18,9 +16,7 @@ public class ListerPizzaOptionMenu extends OptionMenu {
 		return "1. Lister les pizzas";
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see fr.pizzeria.ihm.OptionMenu#execute(fr.pizzeria.dao.IPizzaDao)
 	 */
 	@Override

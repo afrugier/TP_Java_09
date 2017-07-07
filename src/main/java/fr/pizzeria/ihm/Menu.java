@@ -15,7 +15,7 @@ public class Menu {
 	static Map<Integer, OptionMenu> optionMenu = new HashMap<>();
 	static Scanner questionAjout = new Scanner(System.in).useLocale(Locale.US);
 
-	public Menu(){
+	public Menu() {
 		optionMenu.put(new Integer(0), new ListerPizzaOptionMenu());
 		optionMenu.put(new Integer(1), new AjouterPizzaOptionMenu());
 		optionMenu.put(new Integer(2), new ModifierPizzaOptionMenu());
@@ -26,7 +26,7 @@ public class Menu {
 	 * execute le code en fonction du choix réaliser dans le menu
 	 */
 	public void manage() {
-		
+
 		PizzaDaoMemoire dao = new PizzaDaoMemoire();
 
 		int choixPizza = 0;
@@ -35,24 +35,29 @@ public class Menu {
 			choixPizza = questionAjout.nextInt();
 
 			switch (choixPizza) {
+			/* case 1 : Affiche la liste des pizzas */
 			case 1:
 				System.out.println(optionMenu.get(0).getTitle());
 				optionMenu.get(0).execute(dao);
 				break;
+			/* case 2 : Permet l'ajout d'une pizza */
 			case 2:
 				System.out.println(optionMenu.get(1).getTitle());
 				optionMenu.get(1).execute(dao);
 				break;
+			/* case 3 : Permet de modifier un pizza */
 			case 3:
 				System.out.println(optionMenu.get(2).getTitle());
 				optionMenu.get(0).execute(dao);
 				optionMenu.get(2).execute(dao);
 				break;
+			/* case 4 : Permet de supprimer une Pizza */
 			case 4:
 				System.out.println(optionMenu.get(3).getTitle());
 				optionMenu.get(0).execute(dao);
 				optionMenu.get(3).execute(dao);
 				break;
+			/* Permet de sortir de l'application */
 			case 99:
 				System.out.println("Aurevoir :-(");
 				break;

@@ -7,7 +7,6 @@ import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
-import org.apache.commons.text.similarity.LevenshteinDistance;
 
 public class AjouterPizzaOptionMenu extends OptionMenu {
 
@@ -58,6 +57,7 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 		}
 		String categ = questionAjout.next();
 
+		/*Enregistrement de la nouvelle Pizza*/
 		Pizza pizza = new Pizza(codePizza, nomPizza, prixPizza, CategoriePizza.valueOf(categ));
 
 		try {

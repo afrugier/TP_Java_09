@@ -1,5 +1,11 @@
 package fr.pizzeria.model;
 
+/**
+ * @author pc
+ * 
+ * Génere les catégories des pizzas
+ *
+ */
 public enum CategoriePizza {
 	VIANDE("Viande"), POISSON("Poisson"), VEGETARIENNE("Végetarienne"), VEGETALIENNE("Végetalienne"), FROMAGES(
 			"Fromages");

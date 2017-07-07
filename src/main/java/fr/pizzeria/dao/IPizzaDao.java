@@ -33,7 +33,15 @@ public interface IPizzaDao {
 	 */
 	boolean deletePizza(String codePizza) throws DeletePizzaException;
 	
+	/**
+	 * @param codePizza
+	 * @throws SavePizzaException
+	 */
 	void verifierExistence(String codePizza) throws SavePizzaException;
 	
+	/**
+	 * @param codePizza
+	 * @throws SavePizzaException
+	 */
 	void verifierAbsence(String codePizza) throws SavePizzaException;
 }
