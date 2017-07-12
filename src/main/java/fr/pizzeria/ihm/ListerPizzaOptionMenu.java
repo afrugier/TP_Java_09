@@ -32,7 +32,7 @@ public class ListerPizzaOptionMenu extends OptionMenu {
 				System.out.print(dao.findAllPizzas().get(i).getCode().concat(" -> ")
 						.concat(dao.findAllPizzas().get(i).getNom()).concat(" : Catégorie ")
 						.concat(dao.findAllPizzas().get(i).getCategoriePizza().getLibelle()).concat(" (")
-						+ dao.findAllPizzas().get(i).getPrix() + ") ");
+						dao.findAllPizzas().get(i).getPrix() + ") ");
 
 				System.out.println("");
 			}
