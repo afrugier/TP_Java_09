@@ -13,7 +13,7 @@ import fr.pizzeria.model.Pizza;
  */
 public class PizzaDaoMemoire implements IPizzaDao {
 
-	List<Pizza> listePizza = new ArrayList<Pizza>();
+	List<Pizza> listePizza = new ArrayList<>();
 
 	/**
 	 * initialise le tableau de pizza

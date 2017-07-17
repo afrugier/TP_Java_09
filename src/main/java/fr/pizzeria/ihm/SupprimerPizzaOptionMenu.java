@@ -3,6 +3,9 @@ package fr.pizzeria.ihm;
 import java.util.Locale;
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaException;
@@ -10,6 +13,7 @@ import fr.pizzeria.exception.SavePizzaException;
 public class SupprimerPizzaOptionMenu extends OptionMenu {
 
 	static Scanner questionAjout = new Scanner(System.in).useLocale(Locale.US);
+	private static final Logger LOG = LoggerFactory.getLogger(SupprimerPizzaOptionMenu.class);
 
 	/* (non-Javadoc)
 	 * @see fr.pizzeria.ihm.OptionMenu#getLibelle()
@@ -25,9 +29,9 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 	@Override
 	public boolean execute(IPizzaDao dao) {
 
-		System.out.println("Veuillez Choisir la pizza à supprimer");
+		LOG.info("Veuillez Choisir la pizza à supprimer");
 
-		System.out.println("(99 pour abandonner)");
+		LOG.info("(99 pour abandonner)");
 		
 		String codePizza = null;
 		boolean codeTrouve = false;
@@ -38,7 +42,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 				dao.verifierExistence(codePizza);
 				codeTrouve = true;
 			} catch (SavePizzaException e) {
-				System.out.println("Le code " + codePizza + " n'existe pas");
+				LOG.info("Le code " + codePizza + " n'existe pas");
 				codeTrouve = false;
 			}
 		} while (!codeTrouve);
@@ -49,12 +53,12 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 			try {
 				dao.deletePizza(codePizza);
 			} catch (DeletePizzaException e) {
-				System.out.println(e.getMessage());
-				e.printStackTrace();
+				LOG.info(e.getMessage());
+				LOG.error("Error", e);
 			}
 			
-			System.out.println("Pizza Supprimée !");
-			System.out.println("");
+			LOG.info("Pizza Supprimée !");
+			LOG.info("");
 
 		}
 		return false;

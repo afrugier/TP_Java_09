@@ -3,6 +3,9 @@ package fr.pizzeria.ihm;
 import java.util.Locale;
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.model.CategoriePizza;
@@ -12,6 +15,7 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 
 	static Scanner questionAjout = new Scanner(System.in).useLocale(Locale.US);
 
+	private static final Logger LOG = LoggerFactory.getLogger(AjouterPizzaOptionMenu.class);
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -29,7 +33,8 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 	 */
 	@Override
 	public boolean execute(IPizzaDao dao) {
-		System.out.println("Veuillez saisir le code");
+
+		LOG.info("Veuillez saisir le code");
 
 		String codePizza = null;
 		boolean codeTrouve = false;
@@ -40,20 +45,20 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 				dao.verifierAbsence(codePizza);
 				codeTrouve = true;
 			} catch (SavePizzaException e) {
-				System.out.println(e.getMessage());
+				LOG.info(e.getMessage());
 				codeTrouve = false;
 			}
 		} while (!codeTrouve);
 
-		System.out.println("Veuillez saisir le nom (sans espace)");
+		LOG.info("Veuillez saisir le nom (sans espace)");
 		String nomPizza = questionAjout.next();
 
-		System.out.println("Veuillez saisir le prix");
+		LOG.info("Veuillez saisir le prix");
 		double prixPizza = questionAjout.nextDouble();
 
-		System.out.println("Veuillez saisir la catégorie de la pizza");
+		LOG.info("Veuillez saisir la catégorie de la pizza");
 		for (CategoriePizza categ : CategoriePizza.values()) {
-				System.out.println(categ.name());
+			LOG.info("{}", categ.name());
 		}
 		String categ = questionAjout.next();
 
@@ -63,12 +68,12 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 		try {
 			dao.saveNewPizza(pizza);
 		} catch (SavePizzaException e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
+			LOG.info(e.getMessage());
+			LOG.error("Error : ", e);
 		}
 
-		System.out.println("Pizza Ajouté !");
-		System.out.println("");
+		LOG.info("Pizza Ajouté !");
+		LOG.info("");
 
 		return false;
 	}

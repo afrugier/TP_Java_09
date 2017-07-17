@@ -5,6 +5,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.pizzeria.dao.PizzaDaoMemoire;
 
 /**
@@ -14,6 +17,7 @@ import fr.pizzeria.dao.PizzaDaoMemoire;
 public class Menu {
 	static Map<Integer, OptionMenu> optionMenu = new HashMap<>();
 	static Scanner questionAjout = new Scanner(System.in).useLocale(Locale.US);
+	private static final Logger LOG = LoggerFactory.getLogger(Menu.class);
 
 	public Menu() {
 		optionMenu.put(new Integer(0), new ListerPizzaOptionMenu());
@@ -37,29 +41,29 @@ public class Menu {
 			switch (choixPizza) {
 			/* case 1 : Affiche la liste des pizzas */
 			case 1:
-				System.out.println(optionMenu.get(0).getTitle());
+				LOG.info(optionMenu.get(0).getTitle());
 				optionMenu.get(0).execute(dao);
 				break;
 			/* case 2 : Permet l'ajout d'une pizza */
 			case 2:
-				System.out.println(optionMenu.get(1).getTitle());
+				LOG.info(optionMenu.get(1).getTitle());
 				optionMenu.get(1).execute(dao);
 				break;
 			/* case 3 : Permet de modifier un pizza */
 			case 3:
-				System.out.println(optionMenu.get(2).getTitle());
+				LOG.info(optionMenu.get(2).getTitle());
 				optionMenu.get(0).execute(dao);
 				optionMenu.get(2).execute(dao);
 				break;
 			/* case 4 : Permet de supprimer une Pizza */
 			case 4:
-				System.out.println(optionMenu.get(3).getTitle());
+				LOG.info(optionMenu.get(3).getTitle());
 				optionMenu.get(0).execute(dao);
 				optionMenu.get(3).execute(dao);
 				break;
 			/* Permet de sortir de l'application */
 			case 99:
-				System.out.println("Aurevoir :-(");
+				LOG.info("Aurevoir :-(");
 				break;
 			default:
 				break;
@@ -72,13 +76,13 @@ public class Menu {
 	 */
 	public void afficher() {
 		// Titre
-		System.out.println("***** Pizzeria Administration *****");
+		LOG.info("***** Pizzeria Administration *****");
 
 		for (int i = 0; i < optionMenu.size(); i++) {
-			System.out.println(optionMenu.get(i).getLibelle());
+			LOG.info(optionMenu.get(i).getLibelle());
 		}
 
-		System.out.println("99. Sortir");
+		LOG.info("99. Sortir");
 
 	}
 }

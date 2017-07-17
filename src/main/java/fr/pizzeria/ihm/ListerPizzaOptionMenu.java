@@ -1,5 +1,8 @@
 package fr.pizzeria.ihm;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.pizzeria.dao.IPizzaDao;
 
 /**
@@ -7,6 +10,8 @@ import fr.pizzeria.dao.IPizzaDao;
  *
  */
 public class ListerPizzaOptionMenu extends OptionMenu {
+
+	private static final Logger LOG = LoggerFactory.getLogger(ListerPizzaOptionMenu.class);
 
 	/*
 	 * (non-Javadoc)
@@ -29,16 +34,14 @@ public class ListerPizzaOptionMenu extends OptionMenu {
 
 			if (dao.findAllPizzas().get(i) != null) {
 
-				System.out.print(dao.findAllPizzas().get(i).getCode().concat(" -> ")
-						.concat(dao.findAllPizzas().get(i).getNom()).concat(" : Catégorie ")
-						.concat(dao.findAllPizzas().get(i).getCategoriePizza().getLibelle()).concat(" (")
-						+ dao.findAllPizzas().get(i).getPrix() + ") ");
-
-				System.out.println("");
+				LOG.info("{} -> {} : Catégorie {}({})", dao.findAllPizzas().get(i).getCode(),
+						dao.findAllPizzas().get(i).getNom(),
+						dao.findAllPizzas().get(i).getCategoriePizza().getLibelle(),
+						dao.findAllPizzas().get(i).getPrix());
 			}
 		}
 
-		System.out.println("");
+		LOG.info("");
 
 		return false;
 	}
