@@ -12,7 +12,7 @@ import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-public class ModifierPizzaOptionMenu extends OptionMenu {
+public class ModifierPizzaOptionMenu implements OptionMenu {
 
 	static Scanner questionAjout = new Scanner(System.in).useLocale(Locale.US);
 	private static final Logger LOG = LoggerFactory.getLogger(ModifierPizzaOptionMenu.class);
@@ -63,7 +63,8 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 			
 			LOG.info("Veuillez saisir la catégorie de la pizza");
 			for (CategoriePizza categ : CategoriePizza.values()) {
-				System.out.println(categ);
+				String categorie = categ.getLibelle();
+				LOG.info(categorie);
 			}
 			String categ = questionAjout.next();
 

@@ -20,10 +20,11 @@ public class Menu {
 	private static final Logger LOG = LoggerFactory.getLogger(Menu.class);
 
 	public Menu() {
-		optionMenu.put(new Integer(0), new ListerPizzaOptionMenu());
-		optionMenu.put(new Integer(1), new AjouterPizzaOptionMenu());
-		optionMenu.put(new Integer(2), new ModifierPizzaOptionMenu());
-		optionMenu.put(new Integer(3), new SupprimerPizzaOptionMenu());
+
+		optionMenu.put(Integer.valueOf(0), new ListerPizzaOptionMenu());
+		optionMenu.put(Integer.valueOf(1), new AjouterPizzaOptionMenu());
+		optionMenu.put(Integer.valueOf(2), new ModifierPizzaOptionMenu());
+		optionMenu.put(Integer.valueOf(3), new SupprimerPizzaOptionMenu());
 	}
 
 	/**

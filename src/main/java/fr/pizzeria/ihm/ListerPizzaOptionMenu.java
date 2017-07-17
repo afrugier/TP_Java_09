@@ -9,7 +9,7 @@ import fr.pizzeria.dao.IPizzaDao;
  * @author pc Fait la liste des pizzas situer dans le tableau listePizza
  *
  */
-public class ListerPizzaOptionMenu extends OptionMenu {
+public class ListerPizzaOptionMenu implements OptionMenu {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ListerPizzaOptionMenu.class);
 

@@ -11,7 +11,7 @@ import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-public class AjouterPizzaOptionMenu extends OptionMenu {
+public class AjouterPizzaOptionMenu implements OptionMenu {
 
 	static Scanner questionAjout = new Scanner(System.in).useLocale(Locale.US);
 
@@ -58,7 +58,8 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 
 		LOG.info("Veuillez saisir la catégorie de la pizza");
 		for (CategoriePizza categ : CategoriePizza.values()) {
-			LOG.info("{}", categ.name());
+			String categorie = categ.name();
+			LOG.info("{}", categorie);
 		}
 		String categ = questionAjout.next();
 

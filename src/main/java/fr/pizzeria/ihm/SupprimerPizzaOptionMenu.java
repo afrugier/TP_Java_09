@@ -10,7 +10,7 @@ import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaException;
 
-public class SupprimerPizzaOptionMenu extends OptionMenu {
+public class SupprimerPizzaOptionMenu implements OptionMenu {
 
 	static Scanner questionAjout = new Scanner(System.in).useLocale(Locale.US);
 	private static final Logger LOG = LoggerFactory.getLogger(SupprimerPizzaOptionMenu.class);
