@@ -11,7 +11,7 @@ import fr.pizzeria.exception.SavePizzaException;
 
 public class ChoixPizza {
 	static Scanner questionAjout = new Scanner(System.in).useLocale(Locale.US);
-	private static final Logger LOG = LoggerFactory.getLogger(SupprimerPizzaOptionMenu.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ChoixPizza.class);
 
 	public String choice(IPizzaDao dao) {
 		LOG.info("(99 pour abandonner)");
@@ -26,6 +26,7 @@ public class ChoixPizza {
 				codeTrouve = true;
 			} catch (SavePizzaException e) {
 				LOG.info("Le code " + codePizza + " n'existe pas");
+				SavePizzaException.executer(e);
 				codeTrouve = false;
 			}
 		} while (!codeTrouve);
