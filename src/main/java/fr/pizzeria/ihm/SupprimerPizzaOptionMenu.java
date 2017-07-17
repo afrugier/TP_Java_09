@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.DeletePizzaException;
-import fr.pizzeria.exception.SavePizzaException;
 
 public class SupprimerPizzaOptionMenu implements OptionMenu {
 
@@ -30,22 +29,9 @@ public class SupprimerPizzaOptionMenu implements OptionMenu {
 	public boolean execute(IPizzaDao dao) {
 
 		LOG.info("Veuillez Choisir la pizza à supprimer");
-
-		LOG.info("(99 pour abandonner)");
 		
-		String codePizza = null;
-		boolean codeTrouve = false;
-
-		do {
-			codePizza = questionAjout.next();
-			try {
-				dao.verifierExistence(codePizza);
-				codeTrouve = true;
-			} catch (SavePizzaException e) {
-				LOG.info("Le code " + codePizza + " n'existe pas");
-				codeTrouve = false;
-			}
-		} while (!codeTrouve);
+		ChoixPizza cp = new ChoixPizza();
+		String codePizza = cp.choice(dao);
 		
 		
 		if (!codePizza.equals("99")) {

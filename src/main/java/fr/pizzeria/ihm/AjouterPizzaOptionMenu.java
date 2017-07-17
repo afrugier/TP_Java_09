@@ -42,7 +42,7 @@ public class AjouterPizzaOptionMenu implements OptionMenu {
 		do {
 			codePizza = questionAjout.next();
 			try {
-				dao.verifierAbsence(codePizza);
+				dao.verifierAbsence(codePizza.toUpperCase());
 				codeTrouve = true;
 			} catch (SavePizzaException e) {
 				LOG.info(e.getMessage());
@@ -64,7 +64,8 @@ public class AjouterPizzaOptionMenu implements OptionMenu {
 		String categ = questionAjout.next();
 
 		/*Enregistrement de la nouvelle Pizza*/
-		Pizza pizza = new Pizza(codePizza, nomPizza, prixPizza, CategoriePizza.valueOf(categ));
+		Pizza pizza = new Pizza(codePizza.toUpperCase(), nomPizza, prixPizza,
+				CategoriePizza.valueOf(categ.toUpperCase()));
 
 		try {
 			dao.saveNewPizza(pizza);
