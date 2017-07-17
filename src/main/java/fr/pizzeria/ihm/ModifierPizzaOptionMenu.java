@@ -34,10 +34,9 @@ public class ModifierPizzaOptionMenu implements OptionMenu {
 
 		LOG.info("Veuillez Choisir la pizza à modifier");
 
-		ChoixPizza cp = new ChoixPizza();
-		String codePizza = cp.choice(dao);
+		String codePizza = new ChoixPizza().choice(dao);
 
-		if (!codePizza.equals("99")) {
+		if (!"99".equals(codePizza)) {
 
 			LOG.info("Veuillez saisir le nouveau code");
 			String newCodePizza = questionAjout.next();

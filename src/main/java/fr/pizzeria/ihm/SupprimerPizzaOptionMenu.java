@@ -30,11 +30,10 @@ public class SupprimerPizzaOptionMenu implements OptionMenu {
 
 		LOG.info("Veuillez Choisir la pizza à supprimer");
 		
-		ChoixPizza cp = new ChoixPizza();
-		String codePizza = cp.choice(dao);
+		String codePizza = new ChoixPizza().choice(dao);
 		
 		
-		if (!codePizza.equals("99")) {
+		if (!"99".equals(codePizza)) {
 
 			try {
 				dao.deletePizza(codePizza);

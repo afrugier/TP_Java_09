@@ -12,19 +12,7 @@ public class Pizza {
 	double prix;
 	static int compteur = 0;
 	CategoriePizza categoriePizza;
-	
-	/**
-	 * @return
-	 */
-	public CategoriePizza getCategoriePizza() {
-		return categoriePizza;
-	}
-	/**
-	 * @param categoriePizza
-	 */
-	public void setCategoriePizza(CategoriePizza categoriePizza) {
-		this.categoriePizza = categoriePizza;
-	}
+
 	/**
 	 * @param id
 	 * @param code
@@ -38,6 +26,7 @@ public class Pizza {
 		this.prix = prix;
 		this.categoriePizza = categoriePizza;
 	}
+
 	/**
 	 * @param id
 	 * @param code
@@ -51,6 +40,21 @@ public class Pizza {
 		this.prix = prix;
 		this.categoriePizza = categoriePizza;
 	}
+	
+	/**
+	 * @return
+	 */
+	public CategoriePizza getCategoriePizza() {
+		return categoriePizza;
+	}
+
+	/**
+	 * @param categoriePizza
+	 */
+	public void setCategoriePizza(CategoriePizza categoriePizza) {
+		this.categoriePizza = categoriePizza;
+	}
+
 
 	/**
 	 * @return
