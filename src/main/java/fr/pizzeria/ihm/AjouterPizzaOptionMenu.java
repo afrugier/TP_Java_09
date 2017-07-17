@@ -46,6 +46,7 @@ public class AjouterPizzaOptionMenu implements OptionMenu {
 				codeTrouve = true;
 			} catch (SavePizzaException e) {
 				LOG.info(e.getMessage());
+				SavePizzaException.executer(e);
 				codeTrouve = false;
 			}
 		} while (!codeTrouve);
