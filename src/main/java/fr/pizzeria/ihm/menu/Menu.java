@@ -41,6 +41,13 @@ public class Menu {
 
 	}
 
+	public void afficher() {
+		// Titre
+		LOG.info("***** Pizzeria Administration *****");
+
+		optionMenu.forEach((numero, option) -> LOG.info(numero + ". " + option.getLibelle()));
+	}
+
 	/**
 	 * execute le code en fonction du choix réaliser dans le menu
 	 */
@@ -50,10 +57,7 @@ public class Menu {
 
 		do {
 
-			// Titre
-			LOG.info("***** Pizzeria Administration *****");
-
-			optionMenu.forEach((numero, option) -> LOG.info(numero + ". " + option.getLibelle()));
+			afficher();
 
 			choixPizza = questionAjout.nextInt();
 
