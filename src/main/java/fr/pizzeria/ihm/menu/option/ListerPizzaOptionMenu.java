@@ -1,4 +1,4 @@
-package fr.pizzeria.ihm;
+package fr.pizzeria.ihm.menu.option;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ public class ListerPizzaOptionMenu implements OptionMenu {
 	 */
 	@Override
 	public String getLibelle() {
-		return "1. Lister les pizzas";
+		return "Lister les pizzas";
 	}
 
 	/*

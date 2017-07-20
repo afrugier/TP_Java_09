@@ -2,12 +2,12 @@ package fr.pizzeria.ihm;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Scanner;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
+
+import fr.pizzeria.ihm.menu.Menu;
 
 public class MenuTest {
 	@Rule
@@ -16,14 +16,13 @@ public class MenuTest {
 
 	@Before
 	public void setUp() throws Exception {
-		Scanner sc = new Scanner(System.in);
 		this.menu = new Menu();
 	}
 
 	@Test
 	public void testAfficher() throws Exception {
 
-		menu.afficher();
+		menu.manage();
 
 		assertThat(systemOutRule.getLog()).contains("***** Pizzeria Administration *****");
 		assertThat(systemOutRule.getLog()).contains("1. Lister les pizzas");

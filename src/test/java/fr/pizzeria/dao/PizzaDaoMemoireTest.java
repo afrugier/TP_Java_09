@@ -67,7 +67,7 @@ public class PizzaDaoMemoireTest {
 
 	@Test(expected = SavePizzaException.class)
 	public void testVerifierExistence() throws SavePizzaException {
-		pizzaDaoMemoire.verifierExistence("jkf");
+		pizzaDaoMemoire.verifierExistence("ERT");
 
 	}
 

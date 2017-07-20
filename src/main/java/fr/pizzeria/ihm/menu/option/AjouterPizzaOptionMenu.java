@@ -1,4 +1,4 @@
-package fr.pizzeria.ihm;
+package fr.pizzeria.ihm.menu.option;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -13,7 +13,7 @@ import fr.pizzeria.model.Pizza;
 
 public class AjouterPizzaOptionMenu implements OptionMenu {
 
-	static Scanner questionAjout = new Scanner(System.in).useLocale(Locale.US);
+	Scanner questionAjout = new Scanner(System.in).useLocale(Locale.US);
 
 	private static final Logger LOG = LoggerFactory.getLogger(AjouterPizzaOptionMenu.class);
 	/*
@@ -23,7 +23,7 @@ public class AjouterPizzaOptionMenu implements OptionMenu {
 	 */
 	@Override
 	public String getLibelle() {
-		return "2. Ajouter une nouvelle pizza";
+		return "Ajouter une nouvelle pizza";
 	}
 
 	/*

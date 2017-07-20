@@ -1,4 +1,4 @@
-package fr.pizzeria.ihm;
+package fr.pizzeria.ihm.menu.option;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -8,10 +8,11 @@ import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.DeletePizzaException;
+import fr.pizzeria.ihm.ChoixPizza;
 
 public class SupprimerPizzaOptionMenu implements OptionMenu {
 
-	static Scanner questionAjout = new Scanner(System.in).useLocale(Locale.US);
+	Scanner questionAjout = new Scanner(System.in).useLocale(Locale.US);
 	private static final Logger LOG = LoggerFactory.getLogger(SupprimerPizzaOptionMenu.class);
 
 	/* (non-Javadoc)
@@ -19,7 +20,7 @@ public class SupprimerPizzaOptionMenu implements OptionMenu {
 	 */
 	@Override
 	public String getLibelle() {
-		return "4. Supprimer une pizza";
+		return "Supprimer une pizza";
 	}
 
 	/* (non-Javadoc)

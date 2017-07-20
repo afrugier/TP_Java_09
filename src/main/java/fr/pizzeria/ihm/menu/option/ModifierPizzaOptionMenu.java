@@ -1,4 +1,4 @@
-package fr.pizzeria.ihm;
+package fr.pizzeria.ihm.menu.option;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.ihm.ChoixPizza;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -22,7 +23,7 @@ public class ModifierPizzaOptionMenu implements OptionMenu {
 	 */
 	@Override
 	public String getLibelle() {
-		return "3. Mettre à jour une pizza";
+		return "Mettre à jour une pizza";
 	}
 
 
