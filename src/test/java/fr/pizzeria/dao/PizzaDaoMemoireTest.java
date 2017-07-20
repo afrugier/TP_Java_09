@@ -11,6 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 
+import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -36,12 +37,12 @@ public class PizzaDaoMemoireTest {
 	}
 
 	@Test
-	public void testfindAllPizzas() throws Exception {
+	public void testFindAllPizzas() throws Exception {
 		assertThat(listePizza).containsAll(pizzaDaoMemoire.findAllPizzas());
 	}
 
 	@Test
-	public void testsaveNewPizza() throws Exception {
+	public void testSaveNewPizza() throws Exception {
 		Pizza pizza = new Pizza("CAL", "Calzone", 12.50, CategoriePizza.VIANDE);
 		pizzaDaoMemoire.saveNewPizza(pizza);
 		assertThat(pizzaDaoMemoire.findAllPizzas()).contains(pizza);
@@ -49,7 +50,7 @@ public class PizzaDaoMemoireTest {
 	}
 
 	@Test
-	public void testupdatePizza() throws Exception {
+	public void testUpdatePizza() throws Exception {
 		Pizza pizza = new Pizza("CAL", "Calzone", 10, CategoriePizza.VIANDE);
 		pizzaDaoMemoire.updatePizza("FDM", pizza);
 		assertThat(pizzaDaoMemoire.findAllPizzas()).contains(pizza);
@@ -57,10 +58,22 @@ public class PizzaDaoMemoireTest {
 	}
 
 	@Test
-	public void testdeletePizza() throws Exception {
+	public void testDeletePizza() throws Exception {
 		Pizza pizza = new Pizza("FDM", "Fruit de mer", 12.50, CategoriePizza.POISSON);
 		pizzaDaoMemoire.deletePizza("FDM");
 		assertThat(pizzaDaoMemoire.findAllPizzas()).doesNotContain(pizza);
+
+	}
+
+	@Test(expected = SavePizzaException.class)
+	public void testVerifierExistence() throws SavePizzaException {
+		pizzaDaoMemoire.verifierExistence("jkf");
+
+	}
+
+	@Test(expected = SavePizzaException.class)
+	public void testVerifierAbsence() throws SavePizzaException {
+		pizzaDaoMemoire.verifierAbsence("FDM");
 
 	}
 }
