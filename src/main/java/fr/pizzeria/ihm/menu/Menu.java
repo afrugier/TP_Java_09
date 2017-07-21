@@ -44,7 +44,6 @@ public class Menu {
 	public void afficher() {
 		// Titre
 		LOG.info("***** Pizzeria Administration *****");
-
 		optionMenu.forEach((numero, option) -> LOG.info(numero + ". " + option.getLibelle()));
 	}
 
@@ -54,15 +53,10 @@ public class Menu {
 	public void manage() {
 
 		PizzaDaoMemoire dao = new PizzaDaoMemoire();
-
 		do {
-
 			afficher();
-
 			choixPizza = questionAjout.nextInt();
-
 			optionMenu.get(choixPizza).execute(dao);
-
 		} while (choixPizza != NUMERO_OPTION_SORTIE);
 
 	}
