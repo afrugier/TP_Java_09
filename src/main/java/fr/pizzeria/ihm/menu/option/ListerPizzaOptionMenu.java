@@ -30,15 +30,19 @@ public class ListerPizzaOptionMenu implements OptionMenu {
 	 */
 	@Override
 	public boolean execute(IPizzaDao dao) {
-		for (int i = 0; i < dao.findAllPizzas().size(); i++) {
+		try {
+			for (int i = 0; i < dao.findAllPizzas().size(); i++) {
 
-			if (dao.findAllPizzas().get(i) != null) {
+				if (dao.findAllPizzas().get(i) != null) {
 
-				LOG.info("{} -> {} : Catégorie {}({})", dao.findAllPizzas().get(i).getCode(),
-						dao.findAllPizzas().get(i).getNom(),
-						dao.findAllPizzas().get(i).getCategoriePizza().getLibelle(),
-						dao.findAllPizzas().get(i).getPrix());
+					LOG.info("{} -> {} : Catégorie {}({})", dao.findAllPizzas().get(i).getCode(),
+							dao.findAllPizzas().get(i).getNom(),
+							dao.findAllPizzas().get(i).getCategoriePizza().getLibelle(),
+							dao.findAllPizzas().get(i).getPrix());
+				}
 			}
+		} catch (Exception e) {
+			LOG.debug("Error", e);
 		}
 
 		LOG.info("");

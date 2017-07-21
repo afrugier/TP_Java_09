@@ -27,6 +27,7 @@ public class PizzaDataBaseTest {
 	static Connection connection;
 	static Statement statement;
 	private static final Logger LOG = LoggerFactory.getLogger(AjouterPizzaOptionMenu.class);
+	PizzaDataBase pizzaDataBase = new PizzaDataBase();;
 
 	static List<Pizza> listePizza;
 	static PreparedStatement insertPizza;
@@ -69,15 +70,22 @@ public class PizzaDataBaseTest {
 
 	@Test
 	public void testFindAllPizzasBDD() throws Exception {
-		ResultSet resultats = statement.executeQuery("SELECT * FROM PIZZA");
-		while (resultats.next()) {
-			assertThat(resultats.getString("code")).isIn("FDM", "LEG", "REI", "FRO", "CAN", "SAV", "ORI", "CHA");
-			assertThat(resultats.getString("nom")).isIn("Fruit de mer", "La 4 légumes", "La reine", "La 4 fromages",
-					"La cannibale", "La savoyarde", "L'orientale", "Champetre");
-			assertThat(resultats.getDouble("prix")).isIn(12.50, 14.00, 11.50, 12.00, 13.00, 13.50);
-			assertThat(resultats.getString("categorie")).isIn("Poisson", "Fromages", "Végetarienne", "Viande",
-					"Végetalienne");
-		}
+		pizzaDataBase.initPizza();
+		assertThat(listePizza).containsAll(pizzaDataBase.findAllPizzas());
+		//
+		// ResultSet resultats = statement.executeQuery("SELECT * FROM PIZZA");
+		// while (resultats.next()) {
+		// assertThat(resultats.getString("code")).isIn("FDM", "LEG", "REI",
+		// "FRO", "CAN", "SAV", "ORI", "CHA");
+		// assertThat(resultats.getString("nom")).isIn("Fruit de mer", "La 4
+		// légumes", "La reine", "La 4 fromages",
+		// "La cannibale", "La savoyarde", "L'orientale", "Champetre");
+		// assertThat(resultats.getDouble("prix")).isIn(12.50, 14.00, 11.50,
+		// 12.00, 13.00, 13.50);
+		// assertThat(resultats.getString("categorie")).isIn("Poisson",
+		// "Fromages", "Végetarienne", "Viande",
+		// "Végetalienne");
+		// }
 	}
 
 	@Test

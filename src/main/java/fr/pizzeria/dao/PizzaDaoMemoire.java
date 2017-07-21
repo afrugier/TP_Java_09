@@ -121,4 +121,14 @@ public class PizzaDaoMemoire implements IPizzaDao {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.pizzeria.dao.IPizzaDao#initPizza()
+	 */
+	@Override
+	public void initPizza() {
+		// pas d'override ici
+	}
+
 }

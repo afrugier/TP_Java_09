@@ -8,7 +8,8 @@ import java.util.TreeMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.pizzeria.dao.PizzaDaoMemoire;
+import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.PizzaDataBase;
 import fr.pizzeria.ihm.menu.option.AjouterPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.ListerPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.ModifierPizzaOptionMenu;
@@ -26,10 +27,12 @@ public class Menu {
 	private static final Logger LOG = LoggerFactory.getLogger(Menu.class);
 	static final int NUMERO_OPTION_SORTIE = 99;
 	int choixPizza = NUMERO_OPTION_SORTIE;
+	private IPizzaDao dao;
 
-	public Menu() {
-
+	public Menu(IPizzaDao dao) {
+		this.dao = dao;
 		initMenu();
+
 	}
 
 	private void initMenu() {
@@ -52,7 +55,8 @@ public class Menu {
 	 */
 	public void manage() {
 
-		PizzaDaoMemoire dao = new PizzaDaoMemoire();
+		dao = new PizzaDataBase();
+
 		do {
 			afficher();
 			choixPizza = questionAjout.nextInt();

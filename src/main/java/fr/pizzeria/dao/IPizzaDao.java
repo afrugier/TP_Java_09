@@ -1,9 +1,11 @@
 package fr.pizzeria.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
@@ -14,8 +16,11 @@ import fr.pizzeria.model.Pizza;
 public interface IPizzaDao {
 	/**
 	 * @return liste de pizzas
+	 * @throws SQLException
+	 * @throws StockageException
+	 * @throws Exception
 	 */
-	List<Pizza> findAllPizzas();
+	List<Pizza> findAllPizzas() throws SQLException;
 	/**
 	 * @param pizza
 	 * @return
@@ -45,4 +50,6 @@ public interface IPizzaDao {
 	 * @throws SavePizzaException
 	 */
 	void verifierAbsence(String codePizza) throws SavePizzaException;
+
+	void initPizza();
 }

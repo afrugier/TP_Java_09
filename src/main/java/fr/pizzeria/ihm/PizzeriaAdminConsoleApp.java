@@ -1,5 +1,7 @@
 package fr.pizzeria.ihm;
 
+import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.PizzaDataBase;
 import fr.pizzeria.ihm.menu.Menu;
 
 /**
@@ -12,8 +14,10 @@ public class PizzeriaAdminConsoleApp {
 	 * 
 	 */
 	public static void main(String[] args) {
-
-		Menu menu = new Menu();
+		IPizzaDao dao = new PizzaDataBase();
+		dao.initPizza();
+		
+		Menu menu = new Menu(dao);
 		menu.manage();
 
 	}		

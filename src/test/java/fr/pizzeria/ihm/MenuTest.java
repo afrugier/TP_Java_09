@@ -7,6 +7,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 
+import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.PizzaDataBase;
 import fr.pizzeria.ihm.menu.Menu;
 
 public class MenuTest {
@@ -20,8 +22,10 @@ public class MenuTest {
 
 	@Test
 	public void testAfficher() throws Exception {
+		IPizzaDao dao = new PizzaDataBase();
+		dao.initPizza();
 
-		menu = new Menu();
+		menu = new Menu(dao);
 		menu.afficher();
 		assertThat(systemOutRule.getLog()).contains("***** Pizzeria Administration *****");
 		assertThat(systemOutRule.getLog()).contains("1. Lister les pizzas");
