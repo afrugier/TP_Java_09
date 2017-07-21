@@ -68,7 +68,6 @@ public class PizzaDataBase implements IPizzaDao {
 		List<Pizza> listePizza = new ArrayList<>();
 		ResultSet result = statement.executeQuery("SELECT * FROM PIZZA");
 		try {
-			statement = connection.createStatement();
 			while (result.next()) {
 				String code = result.getString("code");
 				String nom = result.getString("nom");
