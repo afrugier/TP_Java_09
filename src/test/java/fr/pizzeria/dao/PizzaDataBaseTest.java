@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,13 +73,13 @@ public class PizzaDataBaseTest {
 	}
 
 	@Test(expected = SavePizzaException.class)
-	public void testVerifierExistence() throws SavePizzaException {
+	public void testVerifierExistence() throws SavePizzaException, SQLException {
 		pizzaDataBase.verifierExistence("ERT");
 
 	}
 
 	@Test(expected = SavePizzaException.class)
-	public void testVerifierAbsence() throws SavePizzaException {
+	public void testVerifierAbsence() throws SavePizzaException, SQLException {
 		pizzaDataBase.verifierAbsence("FDM");
 
 	}

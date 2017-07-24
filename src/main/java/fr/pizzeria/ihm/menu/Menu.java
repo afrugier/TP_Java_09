@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm.menu;
 
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
@@ -52,8 +53,10 @@ public class Menu {
 
 	/**
 	 * execute le code en fonction du choix réaliser dans le menu
+	 * 
+	 * @throws SQLException
 	 */
-	public void manage() {
+	public void manage() throws SQLException {
 
 		dao = new PizzaDataBase();
 

@@ -176,12 +176,8 @@ public class PizzaDataBase implements IPizzaDao {
 	 * @see fr.pizzeria.dao.IPizzaDao#verifierExistence(java.lang.String)
 	 */
 	@Override
-	public boolean verifierExistence(String codePizza) throws SavePizzaException {
-		try {
-			return existence(codePizza);
-		} catch (SavePizzaException e) {
-			throw new SavePizzaException("Le code " + codePizza + " n'existe pas");
-		}
+	public boolean verifierExistence(String codePizza) throws SavePizzaException, SQLException {
+		return existence(codePizza);
 	}
 
 	/*
@@ -190,12 +186,8 @@ public class PizzaDataBase implements IPizzaDao {
 	 * @see fr.pizzeria.dao.IPizzaDao#verifierAbsence(java.lang.String)
 	 */
 	@Override
-	public boolean verifierAbsence(String codePizza) throws SavePizzaException {
-		try {
-			return existence(codePizza);
-		} catch (SavePizzaException e) {
-			throw new SavePizzaException("Le code " + codePizza + " existe");
-		}
+	public boolean verifierAbsence(String codePizza) throws SavePizzaException, SQLException {
+		return existence(codePizza);
 	}
 
 }

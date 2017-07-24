@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm;
 
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -18,7 +19,7 @@ public class ChoixPizza {
 	ListerPizzaOptionMenu listePizza = new ListerPizzaOptionMenu();
 	SortirOptionMenu sortir = new SortirOptionMenu();
 
-	public String choice(IPizzaDao dao) {
+	public String choice(IPizzaDao dao) throws SQLException {
 		LOG.info("(99 pour abandonner)");
 		LOG.info("");
 		listePizza.execute(dao);

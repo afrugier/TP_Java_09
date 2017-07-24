@@ -40,16 +40,18 @@ public interface IPizzaDao {
 	 * @throws DeletePizzaException
 	 */
 	void deletePizza(String codePizza) throws DeletePizzaException;
+	
+	/**
+	 * @param codePizza
+	 * @throws SavePizzaException
+	 * @throws SQLException
+	 */
+	boolean verifierExistence(String codePizza) throws SavePizzaException, SQLException;
 	/**
 	 * @param codePizza
 	 * @throws SavePizzaException
 	 */
-	boolean verifierExistence(String codePizza) throws SavePizzaException;
-	/**
-	 * @param codePizza
-	 * @throws SavePizzaException
-	 */
-	boolean verifierAbsence(String codePizza) throws SavePizzaException;
+	boolean verifierAbsence(String codePizza) throws SavePizzaException, SQLException;
 
 	void initPizza();
 }

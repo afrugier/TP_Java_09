@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm.menu.option;
 
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -31,7 +32,7 @@ public class ModifierPizzaOptionMenu implements OptionMenu {
 	 * @see fr.pizzeria.ihm.OptionMenu#execute(fr.pizzeria.dao.IPizzaDao)
 	 */
 	@Override
-	public boolean execute(IPizzaDao dao) {
+	public boolean execute(IPizzaDao dao) throws SQLException {
 
 		LOG.info("Veuillez Choisir la pizza à modifier");
 
