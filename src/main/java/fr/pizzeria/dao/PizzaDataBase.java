@@ -21,18 +21,45 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzaDataBase implements IPizzaDao {
 	private static final Logger LOG = LoggerFactory.getLogger(ListerPizzaOptionMenu.class);
-	Connection connection;
-	Statement statement;
-	PreparedStatement insertPizza;
+	private static final String CREATE_TABLE = "CREATE TABLE pizza (`id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,code varchar(10), "
+			+ "nom varchar(255) NOT NULL, prix double NOT NULL, categorie integer(3) NOT NULL);";
+	private static final String INSERT_LIGNE = "INSERT INTO pizza(code, nom, prix, categorie) VALUES (?, ?, ?, ?);";
+	private static final String UPDATE_LIGNE = "UPDATE pizza SET code=?, nom=?, prix=?, categorie=? WHERE code=?;";
+	private static final String DELETE_LIGNE = "DELETE FROM pizza WHERE code=?;";
+	private static final String FIND_PIZZA = "SELECT * FROM pizza WHERE code=?;";
 
+	private Connection createConnexion() throws SQLException {
+		return DriverManager.getConnection("jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1", "sa", "");
+	}
+
+	private void insertLigne(Connection connection, List<Pizza> listePizza) throws SQLException {
+		for (Pizza pizza : listePizza) {
+			try (PreparedStatement queryPizza = connection.prepareStatement(INSERT_LIGNE);) {
+				queryPizza.setString(1, pizza.getCode());
+				queryPizza.setString(2, pizza.getNom());
+				queryPizza.setDouble(3, pizza.getPrix());
+				queryPizza.setInt(4, pizza.getCategoriePizza().ordinal());
+				queryPizza.executeUpdate();
+
+			}
+		}
+	}
+
+	private void createTable(Connection connection) throws SQLException {
+		try (PreparedStatement createPizza = connection.prepareStatement(CREATE_TABLE);) {
+			createPizza.execute();
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.pizzeria.dao.IPizzaDao#initPizza()
+	 */
 	@Override
 	public void initPizza() {
-		try {
-			connection = DriverManager.getConnection("jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1", "sa", "");
-			statement = connection.createStatement();
-			statement.execute("CREATE TABLE `pizza` (`id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,"
-					+ "`code` varchar(10), `nom` varchar(255) NOT NULL, `prix` double NOT NULL,"
-					+ "`categorie` integer(3) NOT NULL);");
+		try (Connection connection = createConnexion();) {
+			createTable(connection);
 
 			List<Pizza> listePizza = new ArrayList<>();
 
@@ -44,19 +71,12 @@ public class PizzaDataBase implements IPizzaDao {
 			listePizza.add(new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.VIANDE));
 			listePizza.add(new Pizza("ORI", "L'orientale", 13.50, CategoriePizza.VIANDE));
 			listePizza.add(new Pizza("CHA", "Champetre", 14.00, CategoriePizza.VEGETARIENNE));
-			for (Pizza pizza : listePizza) {
-				insertPizza = connection
-						.prepareStatement("INSERT INTO pizza(code, nom, prix, categorie) VALUES (?, ?, ?, ?);");
-				insertPizza.setString(1, pizza.getCode());
-				insertPizza.setString(2, pizza.getNom());
-				insertPizza.setDouble(3, pizza.getPrix());
-				insertPizza.setString(4, pizza.getCategoriePizza().getLibelle());
-				insertPizza.executeUpdate();
-			}
+			insertLigne(connection, listePizza);
 		} catch (SQLException e) {
 			LOG.debug("Error", e);
 		}
 	}
+
 
 	/*
 	 * (non-Javadoc)
@@ -65,9 +85,12 @@ public class PizzaDataBase implements IPizzaDao {
 	 */
 	@Override
 	public List<Pizza> findAllPizzas() throws SQLException {
+
 		List<Pizza> listePizza = new ArrayList<>();
-		ResultSet result = statement.executeQuery("SELECT * FROM PIZZA");
-		try {
+		try (Connection connection = createConnexion();
+				Statement statement = connection.createStatement();
+				ResultSet result = statement.executeQuery("SELECT * FROM PIZZA");) {
+
 			while (result.next()) {
 				String code = result.getString("code");
 				String nom = result.getString("nom");
@@ -78,8 +101,6 @@ public class PizzaDataBase implements IPizzaDao {
 			}
 		} catch (SQLException e) {
 			LOG.debug("Error listePizza", e);
-		} finally {
-			result.close();
 		}
 		return listePizza;
 	}
@@ -92,13 +113,12 @@ public class PizzaDataBase implements IPizzaDao {
 	@Override
 	public void saveNewPizza(Pizza pizza) throws SavePizzaException {
 		try {
-			insertPizza = connection
-					.prepareStatement("INSERT INTO pizza(code, nom, prix, categorie) VALUES (?, ?, ?, ?);");
-			insertPizza.setString(1, pizza.getCode());
-			insertPizza.setString(2, pizza.getNom());
-			insertPizza.setDouble(3, pizza.getPrix());
-			insertPizza.setInt(4, pizza.getCategoriePizza().ordinal());
-			insertPizza.executeUpdate();
+			PreparedStatement queryPizza = createConnexion().prepareStatement(INSERT_LIGNE);
+			queryPizza.setString(1, pizza.getCode());
+			queryPizza.setString(2, pizza.getNom());
+			queryPizza.setDouble(3, pizza.getPrix());
+			queryPizza.setInt(4, pizza.getCategoriePizza().ordinal());
+			queryPizza.executeUpdate();
 		} catch (SQLException e) {
 			LOG.debug("Error newPizza", e);
 		}
@@ -113,14 +133,13 @@ public class PizzaDataBase implements IPizzaDao {
 	@Override
 	public void updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException {
 		try {
-			insertPizza = connection
-					.prepareStatement("UPDATE pizza SET code=?, nom=?, prix=?, categorie=? WHERE code=?;");
-			insertPizza.setString(1, pizza.getCode());
-			insertPizza.setString(2, pizza.getNom());
-			insertPizza.setDouble(3, pizza.getPrix());
-			insertPizza.setInt(4, pizza.getCategoriePizza().ordinal());
-			insertPizza.setString(5, codePizza);
-			insertPizza.executeUpdate();
+			PreparedStatement queryPizza = createConnexion().prepareStatement(UPDATE_LIGNE);
+			queryPizza.setString(1, pizza.getCode());
+			queryPizza.setString(2, pizza.getNom());
+			queryPizza.setDouble(3, pizza.getPrix());
+			queryPizza.setInt(4, pizza.getCategoriePizza().ordinal());
+			queryPizza.setString(5, codePizza);
+			queryPizza.executeUpdate();
 		} catch (SQLException e) {
 			LOG.debug("Error updatePizza", e);
 		}
@@ -134,11 +153,20 @@ public class PizzaDataBase implements IPizzaDao {
 	@Override
 	public void deletePizza(String codePizza) throws DeletePizzaException {
 		try {
-			insertPizza = connection.prepareStatement("DELETE FROM pizza WHERE code=?;");
-			insertPizza.setString(1, codePizza);
-			insertPizza.executeUpdate();
+			PreparedStatement queryPizza = createConnexion().prepareStatement(DELETE_LIGNE);
+			queryPizza.setString(1, codePizza);
+			queryPizza.executeUpdate();
 		} catch (SQLException e) {
 			LOG.debug("Error deletePizza", e);
+		}
+	}
+
+	private boolean existence(String codePizza) throws SQLException {
+		try (Connection connection = createConnexion();
+                PreparedStatement findPizza = connection.prepareStatement(FIND_PIZZA);
+                ResultSet result = findPizza.executeQuery();) {
+            findPizza.setString(1, codePizza);
+			return result.first();
 		}
 	}
 
@@ -148,8 +176,12 @@ public class PizzaDataBase implements IPizzaDao {
 	 * @see fr.pizzeria.dao.IPizzaDao#verifierExistence(java.lang.String)
 	 */
 	@Override
-	public void verifierExistence(String codePizza) throws SavePizzaException {
-		// Pas encore fait
+	public boolean verifierExistence(String codePizza) throws SavePizzaException {
+		try {
+			return existence(codePizza);
+		} catch (SQLException e) {
+			throw new SavePizzaException("Le code " + codePizza + " n'existe pas");
+		}
 	}
 
 	/*
@@ -158,8 +190,12 @@ public class PizzaDataBase implements IPizzaDao {
 	 * @see fr.pizzeria.dao.IPizzaDao#verifierAbsence(java.lang.String)
 	 */
 	@Override
-	public void verifierAbsence(String codePizza) throws SavePizzaException {
-		// Pas encore fait
+	public boolean verifierAbsence(String codePizza) throws SavePizzaException {
+		try {
+			return existence(codePizza);
+		} catch (SQLException e) {
+			throw new SavePizzaException("Le code " + codePizza + " existe");
+		}
 	}
 
 }

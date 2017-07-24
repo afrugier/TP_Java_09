@@ -13,6 +13,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 
+import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -21,13 +22,14 @@ public class PizzaDataBaseTest {
 	public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 	static Connection connection;
 	static Statement statement;
-	PizzaDataBase pizzaDataBase = new PizzaDataBase();;
+	static PizzaDataBase pizzaDataBase = new PizzaDataBase();;
 
 	static List<Pizza> listePizza;
 	static PreparedStatement insertPizza;
 
 	@BeforeClass
 	public static void setUp() throws Exception {
+		pizzaDataBase.initPizza();
 
 		listePizza = new ArrayList<>();
 
@@ -43,35 +45,42 @@ public class PizzaDataBaseTest {
 
 	@Test
 	public void testFindAllPizzasBDD() throws Exception {
-		pizzaDataBase.initPizza();
 		assertThat(listePizza).containsAll(pizzaDataBase.findAllPizzas());
 	}
 
 	@Test
 	public void testSaveNewPizza() throws Exception {
-
-		pizzaDataBase.initPizza();
-		Pizza pizza = new Pizza("CAL", "Calzone", 12.50, CategoriePizza.VIANDE);
+		Pizza pizza = new Pizza("HAW", "Hawaienne", 12.50, CategoriePizza.VIANDE);
 		pizzaDataBase.saveNewPizza(pizza);
 		assertThat(pizzaDataBase.findAllPizzas()).contains(pizza);
-
 	}
 
 	@Test
 	public void testUpdatePizza() throws Exception {
-		pizzaDataBase.initPizza();
 		Pizza pizza = new Pizza("CAL", "Calzone", 12.50, CategoriePizza.VIANDE);
-		String codePizza = "LEG";
+		String codePizza = "FRO";
 		pizzaDataBase.updatePizza(codePizza, pizza);
 		assertThat(pizzaDataBase.findAllPizzas()).contains(pizza);
 	}
 
 	@Test
 	public void testDeletePizza() throws Exception {
-		pizzaDataBase.initPizza();
 		Pizza pizza = new Pizza("FDM", "Fruit de mer", 12.50, CategoriePizza.POISSON);
 		String codePizza = "FDM";
 		pizzaDataBase.deletePizza(codePizza);
 		assertThat(pizzaDataBase.findAllPizzas()).doesNotContain(pizza);
 	}
+
+	@Test(expected = SavePizzaException.class)
+	public void testVerifierExistence() throws SavePizzaException {
+		pizzaDataBase.verifierExistence("ERT");
+
+	}
+
+	@Test(expected = SavePizzaException.class)
+	public void testVerifierAbsence() throws SavePizzaException {
+		pizzaDataBase.verifierAbsence("FDM");
+
+	}
+
 }

@@ -10,7 +10,6 @@ public class Pizza {
 	String code;
 	String nom;
 	double prix;
-	static int compteur = 0;
 	CategoriePizza categoriePizza;
 
 	/**
@@ -34,7 +33,6 @@ public class Pizza {
 	 * @param prix
 	 */
 	public Pizza(String code, String nom, double prix, CategoriePizza categoriePizza) {
-		this.id = compteur++;
 		this.nom = nom;
 		this.code = code;
 		this.prix = prix;

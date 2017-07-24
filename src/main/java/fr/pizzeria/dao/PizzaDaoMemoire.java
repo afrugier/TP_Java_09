@@ -75,7 +75,7 @@ public class PizzaDaoMemoire implements IPizzaDao {
 	/* (non-Javadoc)
 	 * @see fr.pizzeria.dao.IPizzaDao#verifierExistence(java.lang.String)
 	 */
-	public void verifierExistence(String codePizza) throws SavePizzaException {
+	public boolean verifierExistence(String codePizza) throws SavePizzaException {
 		boolean trouve = false;
 		for (Pizza p : listePizza) {
 
@@ -86,13 +86,14 @@ public class PizzaDaoMemoire implements IPizzaDao {
 		if (!trouve) {
 			throw new SavePizzaException("Le code " + codePizza + " n'existe pas");
 		}
+		return trouve;
 
 	}
 
 	/* (non-Javadoc)
 	 * @see fr.pizzeria.dao.IPizzaDao#verifierAbsence(java.lang.String)
 	 */
-	public void verifierAbsence(String codePizza) throws SavePizzaException {
+	public boolean verifierAbsence(String codePizza) throws SavePizzaException {
 		boolean trouve = false;
 		for (int i = 0; i < listePizza.size(); i++) {
 
@@ -103,6 +104,7 @@ public class PizzaDaoMemoire implements IPizzaDao {
 		if (trouve) {
 			throw new SavePizzaException("Le code " + codePizza + " existe déja");
 		}
+		return trouve;
 
 	}
 

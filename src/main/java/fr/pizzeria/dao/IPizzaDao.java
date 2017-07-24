@@ -44,12 +44,12 @@ public interface IPizzaDao {
 	 * @param codePizza
 	 * @throws SavePizzaException
 	 */
-	void verifierExistence(String codePizza) throws SavePizzaException;
+	boolean verifierExistence(String codePizza) throws SavePizzaException;
 	/**
 	 * @param codePizza
 	 * @throws SavePizzaException
 	 */
-	void verifierAbsence(String codePizza) throws SavePizzaException;
+	boolean verifierAbsence(String codePizza) throws SavePizzaException;
 
 	void initPizza();
 }
