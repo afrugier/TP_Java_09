@@ -20,7 +20,7 @@ import fr.pizzeria.ihm.menu.option.ListerPizzaOptionMenu;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-public class PizzaDataBase implements IPizzaDao {
+public class PizzaDaoDataBase implements IPizzaDao {
 	private static final Logger LOG = LoggerFactory.getLogger(ListerPizzaOptionMenu.class);
 	private static final String CREATE_TABLE = "CREATE TABLE pizza (`id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,code varchar(10), "
 			+ "nom varchar(255) NOT NULL, prix double NOT NULL, categorie integer(3) NOT NULL);";
@@ -57,7 +57,6 @@ public class PizzaDataBase implements IPizzaDao {
 	 * 
 	 * @see fr.pizzeria.dao.IPizzaDao#initPizza()
 	 */
-	@Override
 	public void initPizza() {
 		try (Connection connection = createConnexion();) {
 			createTable(connection);

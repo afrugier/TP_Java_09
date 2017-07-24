@@ -1,16 +1,42 @@
 package fr.pizzeria.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
 /**
  * @author pc
  *
  */
+@Entity
+@Table(name = "pizza")
+@NamedQueries({ @NamedQuery(name = "pizza.findAll", query = "select p from Pizza p"),
+		@NamedQuery(name = "pizza.findByCode", query = "select p from Pizza p where p.code=:codePizza") })
 public class Pizza {
 
-	int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Integer id;
+	@Column(name = "code")
 	String code;
+	@Column(name = "nom")
 	String nom;
+	@Column(name = "prix")
 	double prix;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "categorie")
 	CategoriePizza categoriePizza;
+
+	public Pizza() {
+		super();
+	}
 
 	/**
 	 * @param id
@@ -38,7 +64,7 @@ public class Pizza {
 		this.prix = prix;
 		this.categoriePizza = categoriePizza;
 	}
-	
+
 	/**
 	 * @return
 	 */
@@ -52,7 +78,6 @@ public class Pizza {
 	public void setCategoriePizza(CategoriePizza categoriePizza) {
 		this.categoriePizza = categoriePizza;
 	}
-
 
 	/**
 	 * @return
@@ -109,7 +134,6 @@ public class Pizza {
 	public void setPrix(double prix) {
 		this.prix = prix;
 	}
-
 
 	@Override
 	public int hashCode() {

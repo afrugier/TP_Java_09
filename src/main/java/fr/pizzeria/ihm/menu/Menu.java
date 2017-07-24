@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDataBase;
+import fr.pizzeria.dao.PizzaDaoDataBase;
 import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.ihm.menu.option.AjouterPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.ListerPizzaOptionMenu;
@@ -58,7 +58,7 @@ public class Menu {
 	 */
 	public void manage() throws StockageException {
 
-		dao = new PizzaDataBase();
+		dao = new PizzaDaoDataBase();
 
 		do {
 			afficher();

@@ -16,12 +16,12 @@ import org.junit.contrib.java.lang.system.SystemOutRule;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-public class PizzaDataBaseTest {
+public class PizzaDaoDataBaseTest {
 	@Rule
 	public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 	static Connection connection;
 	static Statement statement;
-	static PizzaDataBase pizzaDataBase = new PizzaDataBase();;
+	static PizzaDaoDataBase pizzaDataBase = new PizzaDaoDataBase();;
 
 	static List<Pizza> listePizza;
 	static PreparedStatement insertPizza;

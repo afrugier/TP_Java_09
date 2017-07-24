@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDataBase;
+import fr.pizzeria.dao.PizzaDaoDataBase;
 import fr.pizzeria.ihm.menu.Menu;
 
 public class MenuTest {
@@ -22,7 +22,7 @@ public class MenuTest {
 
 	@Test
 	public void testAfficher() throws Exception {
-		IPizzaDao dao = new PizzaDataBase();
+		IPizzaDao dao = new PizzaDaoDataBase();
 		dao.initPizza();
 
 		menu = new Menu(dao);
