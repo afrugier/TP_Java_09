@@ -179,7 +179,7 @@ public class PizzaDataBase implements IPizzaDao {
 	public boolean verifierExistence(String codePizza) throws SavePizzaException {
 		try {
 			return existence(codePizza);
-		} catch (SQLException e) {
+		} catch (SavePizzaException e) {
 			throw new SavePizzaException("Le code " + codePizza + " n'existe pas");
 		}
 	}
@@ -193,7 +193,7 @@ public class PizzaDataBase implements IPizzaDao {
 	public boolean verifierAbsence(String codePizza) throws SavePizzaException {
 		try {
 			return existence(codePizza);
-		} catch (SQLException e) {
+		} catch (SavePizzaException e) {
 			throw new SavePizzaException("Le code " + codePizza + " existe");
 		}
 	}
