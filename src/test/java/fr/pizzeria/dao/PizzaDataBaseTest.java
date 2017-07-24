@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 
-import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -70,18 +68,6 @@ public class PizzaDataBaseTest {
 		String codePizza = "FDM";
 		pizzaDataBase.deletePizza(codePizza);
 		assertThat(pizzaDataBase.findAllPizzas()).doesNotContain(pizza);
-	}
-
-	@Test(expected = SavePizzaException.class)
-	public void testVerifierExistence() throws SavePizzaException, SQLException {
-		pizzaDataBase.verifierExistence("ERT");
-
-	}
-
-	@Test(expected = SavePizzaException.class)
-	public void testVerifierAbsence() throws SavePizzaException, SQLException {
-		pizzaDataBase.verifierAbsence("FDM");
-
 	}
 
 }

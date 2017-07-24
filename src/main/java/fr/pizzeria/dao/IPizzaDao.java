@@ -46,12 +46,7 @@ public interface IPizzaDao {
 	 * @throws SavePizzaException
 	 * @throws SQLException
 	 */
-	boolean verifierExistence(String codePizza) throws SavePizzaException, SQLException;
-	/**
-	 * @param codePizza
-	 * @throws SavePizzaException
-	 */
-	boolean verifierAbsence(String codePizza) throws SavePizzaException, SQLException;
+	boolean verifierExistence(String codePizza) throws StockageException;
 
 	void initPizza();
 }

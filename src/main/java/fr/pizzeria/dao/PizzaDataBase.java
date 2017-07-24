@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.ihm.menu.option.ListerPizzaOptionMenu;
 import fr.pizzeria.model.CategoriePizza;
@@ -161,14 +162,6 @@ public class PizzaDataBase implements IPizzaDao {
 		}
 	}
 
-	private boolean existence(String codePizza) throws SQLException {
-		try (Connection connection = createConnexion();
-                PreparedStatement findPizza = connection.prepareStatement(FIND_PIZZA);
-                ResultSet result = findPizza.executeQuery();) {
-            findPizza.setString(1, codePizza);
-			return result.first();
-		}
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -176,18 +169,19 @@ public class PizzaDataBase implements IPizzaDao {
 	 * @see fr.pizzeria.dao.IPizzaDao#verifierExistence(java.lang.String)
 	 */
 	@Override
-	public boolean verifierExistence(String codePizza) throws SavePizzaException, SQLException {
-		return existence(codePizza);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.pizzeria.dao.IPizzaDao#verifierAbsence(java.lang.String)
-	 */
-	@Override
-	public boolean verifierAbsence(String codePizza) throws SavePizzaException, SQLException {
-		return existence(codePizza);
+	public boolean verifierExistence(String codePizza) throws StockageException {
+		try (Connection connection = createConnexion();
+				PreparedStatement findPizza = connection.prepareStatement(FIND_PIZZA);
+				ResultSet result = findPizza.executeQuery();) {
+			findPizza.setString(1, codePizza);
+			boolean exist = result.first();
+			result.close();
+			findPizza.close();
+			return exist;
+		} catch (SQLException e) {
+			LOG.debug("Error deletePizza", e);
+			return false;
+		}
 	}
 
 }

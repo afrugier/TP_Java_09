@@ -1,8 +1,7 @@
 package fr.pizzeria.ihm.menu.option;
 
-import java.sql.SQLException;
-
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exception.StockageException;
 
 public interface OptionMenu {
 	
@@ -14,5 +13,5 @@ public interface OptionMenu {
 	public abstract String getLibelle();
 	public abstract String getTitle();
 
-	public abstract boolean execute(IPizzaDao dao) throws SQLException;
+	public abstract boolean execute(IPizzaDao dao) throws StockageException;
 }

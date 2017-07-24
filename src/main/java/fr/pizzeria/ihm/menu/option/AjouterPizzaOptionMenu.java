@@ -1,6 +1,5 @@
 package fr.pizzeria.ihm.menu.option;
 
-import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -9,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -33,7 +33,7 @@ public class AjouterPizzaOptionMenu implements OptionMenu {
 	 * @see fr.pizzeria.ihm.OptionMenu#execute(fr.pizzeria.dao.IPizzaDao)
 	 */
 	@Override
-	public boolean execute(IPizzaDao dao) throws SQLException {
+	public boolean execute(IPizzaDao dao) throws StockageException {
 
 		LOG.info("Veuillez saisir le code");
 
@@ -43,7 +43,7 @@ public class AjouterPizzaOptionMenu implements OptionMenu {
 		do {
 			codePizza = questionAjout.next();
 			try {
-				dao.verifierAbsence(codePizza.toUpperCase());
+				dao.verifierExistence(codePizza.toUpperCase());
 				codeTrouve = true;
 			} catch (SavePizzaException e) {
 				LOG.info(e.getMessage());

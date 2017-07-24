@@ -1,7 +1,5 @@
 package fr.pizzeria.ihm;
 
-import java.sql.SQLException;
-
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDataBase;
 import fr.pizzeria.ihm.menu.Menu;
@@ -13,10 +11,10 @@ import fr.pizzeria.ihm.menu.Menu;
 public class PizzeriaAdminConsoleApp {
 	/**
 	 * @param args
-	 * @throws SQLException
+	 * @throws Exception
 	 * 
 	 */
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws Exception {
 		IPizzaDao dao = new PizzaDataBase();
 		dao.initPizza();
 		
