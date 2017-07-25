@@ -125,7 +125,7 @@ public class PizzaDaoMemoire implements IPizzaDao {
 
 	@Override
 	public void initPizza() {
-		// TODO Auto-generated method stub
+		// Pas d'init ici
 
 	}
 }

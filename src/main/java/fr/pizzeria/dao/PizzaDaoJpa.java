@@ -1,6 +1,7 @@
 package fr.pizzeria.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,15 +13,43 @@ import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoJpa implements IPizzaDao {
-
 	private EntityManagerFactory emf;
 	private EntityManager em;
 
 	public PizzaDaoJpa() {
 		emf = Persistence.createEntityManagerFactory("pizzerianthony");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.pizzeria.dao.IPizzaDao#initPizza()
+	 */
+	@Override
+	public void initPizza() {
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+
+		List<Pizza> listePizza = new ArrayList<>();
+
+		listePizza.add(new Pizza("FDM", "Fruit de mer", 12.50, CategoriePizza.POISSON));
+		listePizza.add(new Pizza("LEG", "La 4 légumes", 14.00, CategoriePizza.VEGETALIENNE));
+		listePizza.add(new Pizza("REI", "La reine", 11.50, CategoriePizza.VIANDE));
+		listePizza.add(new Pizza("FRO", "La 4 fromages", 12.00, CategoriePizza.FROMAGES));
+		listePizza.add(new Pizza("CAN", "La cannibale", 12.50, CategoriePizza.VIANDE));
+		listePizza.add(new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.VIANDE));
+		listePizza.add(new Pizza("ORI", "L'orientale", 13.50, CategoriePizza.VIANDE));
+		listePizza.add(new Pizza("CHA", "Champetre", 14.00, CategoriePizza.VEGETARIENNE));
+
+		for (Pizza pizza : listePizza) {
+			em.persist(pizza);
+		}
+		em.getTransaction().commit();
+		em.close();
 	}
 
 	@Override
@@ -41,7 +70,7 @@ public class PizzaDaoJpa implements IPizzaDao {
 	}
 
 	private Pizza findByCode(String codePizza) {
-		return em.createNamedQuery("pizza.findByCode", Pizza.class).setParameter("code", codePizza)
+		return em.createNamedQuery("pizza.findByCode", Pizza.class).setParameter("codePizza", codePizza)
 				.getSingleResult();
 	}
 
@@ -80,11 +109,5 @@ public class PizzaDaoJpa implements IPizzaDao {
 		} catch (NoResultException e) {
 			return false;
 		}
-	}
-
-	@Override
-	public void initPizza() {
-		// TODO Auto-generated method stub
-
 	}
 }
