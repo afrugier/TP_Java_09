@@ -1,7 +1,7 @@
 package fr.pizzeria.ihm;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoDataBase;
+import fr.pizzeria.dao.PizzaDaoJpa;
 import fr.pizzeria.ihm.menu.Menu;
 
 /**
@@ -15,7 +15,7 @@ public class PizzeriaAdminConsoleApp {
 	 * 
 	 */
 	public static void main(String[] args) throws Exception {
-		IPizzaDao dao = new PizzaDaoDataBase();
+		IPizzaDao dao = new PizzaDaoJpa();
 		dao.initPizza();
 		
 		Menu menu = new Menu(dao);
