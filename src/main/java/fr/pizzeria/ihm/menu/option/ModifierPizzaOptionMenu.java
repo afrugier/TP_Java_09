@@ -6,6 +6,7 @@ import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.pizzeria.dao.IClientDao;
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.exception.UpdatePizzaException;
@@ -81,6 +82,12 @@ public class ModifierPizzaOptionMenu implements OptionMenu {
 	@Override
 	public String getTitle() {
 		return "Mise à jour d’une pizza";
+	}
+
+	@Override
+	public boolean execute(IClientDao dao) throws StockageException {
+		// pas ici
+		return false;
 	}
 
 }

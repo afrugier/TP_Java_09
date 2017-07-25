@@ -3,7 +3,9 @@ package fr.pizzeria.ihm.menu.option;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.pizzeria.dao.IClientDao;
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exception.StockageException;
 
 /**
  * @author pc Fait la liste des pizzas situer dans le tableau listePizza
@@ -58,6 +60,12 @@ public class ListerPizzaOptionMenu implements OptionMenu {
 	@Override
 	public String getTitle() {
 		return "Liste des pizzas";
+	}
+
+	@Override
+	public boolean execute(IClientDao dao) throws StockageException {
+		// pas ici
+		return false;
 	}
 
 }

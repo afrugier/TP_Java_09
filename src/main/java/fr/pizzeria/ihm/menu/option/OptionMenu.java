@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm.menu.option;
 
+import fr.pizzeria.dao.IClientDao;
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.StockageException;
 
@@ -14,4 +15,6 @@ public interface OptionMenu {
 	public abstract String getTitle();
 
 	public abstract boolean execute(IPizzaDao dao) throws StockageException;
+
+	public abstract boolean execute(IClientDao dao) throws StockageException;
 }

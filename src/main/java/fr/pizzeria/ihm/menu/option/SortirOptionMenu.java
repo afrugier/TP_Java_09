@@ -3,7 +3,9 @@ package fr.pizzeria.ihm.menu.option;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.pizzeria.dao.IClientDao;
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exception.StockageException;
 
 public class SortirOptionMenu implements OptionMenu {
 
@@ -28,6 +30,12 @@ public class SortirOptionMenu implements OptionMenu {
 		LOG.info("Aurevoir :-(");
 
 		return true;
+	}
+
+	@Override
+	public boolean execute(IClientDao dao) throws StockageException {
+		// pas ici
+		return false;
 	}
 
 }

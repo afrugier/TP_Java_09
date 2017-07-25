@@ -99,5 +99,12 @@
 			<version>5.1.0.Final</version>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- mdp chiffré -->
+		<dependency>
+            <groupId>org.eclipse.ecf</groupId>
+            <artifactId>org.apache.commons.codec</artifactId>
+            <version>1.9.0.v20170208-1614</version>
+            <scope>compile</scope>
+        </dependency>
 	</dependencies>
 </project>
